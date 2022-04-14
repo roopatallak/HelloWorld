@@ -1,4 +1,6 @@
-public class Room  {
+import java.util.*;
+
+public class Room  implements Comparable<Room> {
     private double width;
     private double length;
     private int floor;
@@ -51,12 +53,28 @@ public class Room  {
         this.floor = floor;
     }
 
+    //part e
+    @Override
+    public int compareTo(Room o) {
+        return Comparator.comparing(Room::getFloor).thenComparing(Room::getLength).thenComparing(Room::getWidth).compare(this, o);
+    }
+
     //part d
     @Override
     public String toString() {
-        return "Room " + length +
-                " X " + width +
-                ", floor " + floor;
+        return "Room " + length + " X " + width + ", floor " + floor;
     }
-    
-}
+
+    public static void main(String[] args) {
+        List<Room> rooms = new ArrayList<Room>();
+        rooms.add(new Room (10,30,2));
+        rooms.add(new Room(15,20,1));
+        rooms.add(new Room(5, 4, 13));
+        Collections.sort(rooms);
+        System.out.println("After Sorting " + rooms);
+
+
+        }
+    }
+
+
